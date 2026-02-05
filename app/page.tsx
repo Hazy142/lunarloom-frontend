@@ -1,65 +1,90 @@
-import Image from "next/image";
+import { getPageById } from '@/lib/wordpress';
+import Link from 'next/link';
 
-export default function Home() {
+export default async function Home() {
+  // Fetch the Start page content (ID 30)
+  const startPage = await getPageById(30);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-screen bg-gradient-to-b from-indigo-950 via-purple-900 to-black">
+      <div className="container mx-auto px-4 py-16">
+        {/* Hero Section */}
+        <div className="text-center mb-20">
+          <h1 className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 mb-6 animate-pulse">
+            {startPage?.title.rendered ? (
+              <span dangerouslySetInnerHTML={{ __html: startPage.title.rendered }} />
+            ) : (
+              'Lunar Loom'
+            )}
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-2xl text-purple-200 mb-4">
+            Tarot, Rituale & Mondzyklen
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+          {startPage?.content.rendered && (
+            <div
+              className="text-purple-300 max-w-3xl mx-auto prose prose-invert"
+              dangerouslySetInnerHTML={{ __html: startPage.content.rendered }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          )}
         </div>
-      </main>
-    </div>
+
+        {/* Navigation Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Blog Card */}
+          <Link href="/blog">
+            <div className="group relative bg-gradient-to-br from-purple-900/40 to-indigo-900/40 rounded-xl p-8 border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 cursor-pointer">
+              <div className="text-6xl mb-4">📖</div>
+              <h2 className="text-3xl font-bold text-purple-100 mb-3">
+                Blog
+              </h2>
+              <p className="text-purple-300">
+                Erkenntnisse, Essays und Gedanken zu evidenzbasierter Spiritualität
+              </p>
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-pink-600/0 group-hover:from-purple-600/10 group-hover:to-pink-600/10 rounded-xl transition-all duration-300 pointer-events-none" />
+            </div>
+          </Link>
+
+          {/* Tarot Card */}
+          <Link href="/tarot">
+            <div className="group relative bg-gradient-to-br from-purple-900/40 to-indigo-900/40 rounded-xl p-8 border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 cursor-pointer">
+              <div className="text-6xl mb-4">🔮</div>
+              <h2 className="text-3xl font-bold text-purple-100 mb-3">
+                Tarot
+              </h2>
+              <p className="text-purple-300">
+                Discover the wisdom of the cards and unlock deeper insights into your journey
+              </p>
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-pink-600/0 group-hover:from-purple-600/10 group-hover:to-pink-600/10 rounded-xl transition-all duration-300 pointer-events-none" />
+            </div>
+          </Link>
+
+          {/* Rituals Card */}
+          <Link href="/rituals">
+            <div className="group relative bg-gradient-to-br from-purple-900/40 to-indigo-900/40 rounded-xl p-8 border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 cursor-pointer">
+              <div className="text-6xl mb-4">✨</div>
+              <h2 className="text-3xl font-bold text-purple-100 mb-3">
+                Rituale
+              </h2>
+              <p className="text-purple-300">
+                Sacred practices aligned with lunar phases to enhance your spiritual practice
+              </p>
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-pink-600/0 group-hover:from-purple-600/10 group-hover:to-pink-600/10 rounded-xl transition-all duration-300 pointer-events-none" />
+            </div>
+          </Link>
+        </div>
+
+        {/* Footer Navigation */}
+        <div className="mt-20 text-center">
+          <nav className="flex flex-wrap justify-center gap-6 text-purple-400 text-sm">
+            <Link href="/ueber" className="hover:text-purple-300 transition-colors">Über Rachel</Link>
+            <Link href="/buchung" className="hover:text-purple-300 transition-colors">Buchung</Link>
+            <Link href="/kontakt" className="hover:text-purple-300 transition-colors">Kontakt</Link>
+            <Link href="/faq" className="hover:text-purple-300 transition-colors">FAQ</Link>
+            <Link href="/impressum" className="hover:text-purple-300 transition-colors">Impressum</Link>
+            <Link href="/datenschutz" className="hover:text-purple-300 transition-colors">Datenschutz</Link>
+          </nav>
+        </div>
+      </div>
+    </main>
   );
 }
