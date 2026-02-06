@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter, Cinzel } from "next/font/google"; // Cinzel importieren
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./globals.css";
@@ -15,6 +15,13 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+// Cinzel konfigurieren
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  variable: "--font-cinzel", // CSS Variable für Tailwind
   display: "swap",
 });
 
@@ -40,7 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body className={`${cormorant.variable} ${inter.variable} antialiased`}>
+      <body className={`${cormorant.variable} ${inter.variable} ${cinzel.variable} antialiased`}>
         <div className="page-container flex flex-col min-h-screen">
           <Header />
           <main className="flex-1">
