@@ -48,7 +48,7 @@ const TarotCard: React.FC<TarotCardProps> = ({ number, name, imageSrc, isReverse
                     {/* Nummer Plakette */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 w-24 h-12">
                         <div className="w-full h-full bg-gold-shiny rounded-b-3xl shadow-lg border-b-2 border-tarot-gold-light flex items-center justify-center">
-                            <span className="font-mystical text-2xl font-bold text-tarot-dark drop-shadow-sm pt-1">
+                            <span className="font-mystical text-2xl font-bold text-white drop-shadow-md pt-1">
                                 {number}
                             </span>
                         </div>
@@ -106,8 +106,8 @@ const TarotCard: React.FC<TarotCardProps> = ({ number, name, imageSrc, isReverse
                         </div>
 
                         {/* Zentraler Mond/Sonne */}
-                        <div className="relative z-10 w-20 h-20 rounded-full bg-gold-gradient shadow-[0_0_30px_rgba(212,175,55,0.4)] flex items-center justify-center">
-                            <div className="w-16 h-16 rounded-full bg-tarot-dark/20 backdrop-blur-sm"></div>
+                        <div className="relative z-10 w-24 h-24 rounded-full bg-gold-shiny shadow-[0_0_30px_rgba(212,175,55,0.4)] flex items-center justify-center">
+                            <div className="w-20 h-20 rounded-full bg-amber-100 opacity-90 blur-[1px]"></div>
                         </div>
 
                         <div className="absolute inset-2 border-2 border-tarot-gold rounded-xl pointer-events-none"></div>
@@ -124,8 +124,8 @@ const SideDecoration = ({ position }: { position: 'left' | 'right' }) => {
         <div className={cn("absolute top-1/4 bottom-1/4 w-4 flex flex-col justify-between opacity-60 pointer-events-none", isLeft ? 'left-2' : 'right-2')}>
             <svg width="20" height="300" viewBox="0 0 20 300" className="h-full w-full stroke-tarot-gold fill-none">
                 <path d={isLeft
-                    ? "M0,0 Q20,75 0,150 T0,300"
-                    : "M20,0 Q0,75 20,150 T20,300"} strokeWidth="0.8" />
+                    ? "M0,0 Q20,75 0,150 T0,300 M10,0 L10,300"
+                    : "M20,0 Q0,75 20,150 T20,300 M10,0 L10,300"} strokeWidth="0.5" />
             </svg>
         </div>
     );

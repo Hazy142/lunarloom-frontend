@@ -68,6 +68,89 @@
   --color-foreground: var(--foreground);
   --font-heading: var(--font-cormorant);
   --font-body: var(--font-inter);
+  
+  /* Tarot Card Color System */
+  --color-tarot-dark: #1a0b2e;
+  --color-tarot-gold-light: #f3e5ab;
+  --color-tarot-gold: #d4af37;
+  --color-tarot-gold-dark: #aa8c2c;
+  --color-tarot-gold-shadow: #4b3621;
+  
+  /* Custom Font for Mystical Elements */
+  --font-mystical: var(--font-cinzel);
+}
+
+/* Tarot Tailwind Theme Extension */
+@utility tarot-dark {
+  background-color: #1a0b2e;
+}
+
+@utility bg-tarot-dark {
+  background-color: #1a0b2e;
+}
+
+@utility text-tarot-dark {
+  color: #1a0b2e;
+}
+
+@utility border-tarot-gold {
+  border-color: #d4af37;
+}
+
+@utility border-tarot-gold-dark {
+  border-color: #aa8c2c;
+}
+
+@utility border-tarot-gold-light {
+  border-color: #f3e5ab;
+}
+
+@utility text-tarot-gold {
+  color: #d4af37;
+}
+
+@utility text-tarot-gold-light {
+  color: #f3e5ab;
+}
+
+@utility stroke-tarot-gold {
+  stroke: #d4af37;
+}
+
+@utility bg-gold-gradient {
+  background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%);
+}
+
+@utility bg-gold-shiny {
+  background: linear-gradient(to bottom, #aa8c2c, #f3e5ab, #d4af37, #aa8c2c);
+}
+
+/* Font utility */
+@utility font-mystical {
+  font-family: var(--font-cinzel), serif;
+}
+
+/* 3D Perspective Utilities for Card Flip */
+@utility perspective-1000 {
+  perspective: 1000px;
+}
+
+@utility preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@utility backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Slow rotation for mandala */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@utility animate-spin-slow {
+  animation: spin-slow 60s linear infinite;
 }
 
 /* ============================================
