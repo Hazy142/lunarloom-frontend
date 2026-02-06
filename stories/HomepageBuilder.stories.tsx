@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Section types
 type SectionId = 'hero' | 'navCards' | 'about' | 'cta';
@@ -141,7 +141,7 @@ function CTASection() {
 }
 
 // Section map
-const sectionComponents: Record<SectionId, () => JSX.Element> = {
+const sectionComponents: Record<SectionId, () => React.ReactNode> = {
     hero: HeroSection,
     navCards: NavCardsSection,
     about: AboutSection,
