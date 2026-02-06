@@ -8,7 +8,7 @@ const navLinks = [
     { href: '/tarot', label: 'Tarot' },
     { href: '/rituals', label: 'Rituale' },
     { href: '/blog', label: 'Blog' },
-    { href: '/ueber', label: 'Über Rachel' },
+    { href: '/ueber', label: 'Über uns' },
     { href: '/buchung', label: 'Buchung' },
 ];
 
