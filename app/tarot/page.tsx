@@ -1,9 +1,43 @@
-import { getTarotCards } from '@/lib/wordpress';
-import Link from 'next/link';
-import { Metadata } from 'next';
+'use client';
 
-export default async function TarotPage() {
-    const cards = await getTarotCards();
+import { useEffect, useState } from 'react';
+import { getTarotCards } from '@/lib/wordpress';
+import { TarotCard } from '@/lib/wordpress';
+import TarotCardGallery from '@/components/tarot/TarotCardGallery';
+import Link from 'next/link';
+
+type FilterType = 'all' | 'major' | 'STÄBE' | 'KELCHE' | 'SCHWERTER' | 'MÜNZEN';
+
+export default function TarotPage() {
+    const [cards, setCards] = useState<TarotCard[]>([]);
+    const [filter, setFilter] = useState<FilterType>('all');
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function loadCards() {
+            const data = await getTarotCards();
+            setCards(data);
+            setLoading(false);
+        }
+        loadCards();
+    }, []);
+
+    const filteredCards = cards.filter(card => {
+        if (filter === 'all') return true;
+        if (filter === 'major') return card.meta.category === 'Grosse Arkana';
+        if (filter === 'STÄBE') return card.meta.category?.includes('STÄBE');
+        if (filter === 'KELCHE') return card.meta.category?.includes('KELCHE');
+        if (filter === 'SCHWERTER') return card.meta.category?.includes('SCHWERTER');
+        if (filter === 'MÜNZEN') return card.meta.category?.includes('MÜNZEN');
+        return true;
+    });
+
+    // Group by category for display
+    const majorArcana = filteredCards.filter(c => c.meta.category === 'Grosse Arkana');
+    const wands = filteredCards.filter(c => c.meta.category?.includes('STÄBE'));
+    const cups = filteredCards.filter(c => c.meta.category?.includes('KELCHE'));
+    const swords = filteredCards.filter(c => c.meta.category?.includes('SCHWERTER'));
+    const pentacles = filteredCards.filter(c => c.meta.category?.includes('MÜNZEN'));
 
     return (
         <div className="page-container">
@@ -17,16 +51,85 @@ export default async function TarotPage() {
                         Tarot
                     </h1>
                     <p className="text-lg text-[#FDFBF7]/80 max-w-2xl mx-auto">
-                        Entdecke die Bedeutung jeder Karte – aus meiner persönlichen, evidenzbasierten Perspektive.
+                        Entdecke die Bedeutung jeder Karte – aus einer tiefen, evidenzbasierten Perspektive.
                     </p>
                     <div className="divider-gold mt-6" />
+                </div>
+            </section>
+
+            {/* Filter Bar */}
+            <section className="bg-[#3f2f4e] border-b border-[#FDFBF7]/10">
+                <div className="content-wrapper py-6">
+                    <div className="flex flex-wrap justify-center gap-3">
+                        <button
+                            onClick={() => setFilter('all')}
+                            className={`px-6 py-2 rounded-full text-sm font-medium tracking-wider transition-all ${filter === 'all'
+                                    ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
+                                    : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
+                                }`}
+                        >
+                            ALLE ({cards.length})
+                        </button>
+                        <button
+                            onClick={() => setFilter('major')}
+                            className={`px-6 py-2 rounded-full text-sm font-medium tracking-wider transition-all ${filter === 'major'
+                                    ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
+                                    : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
+                                }`}
+                        >
+                            Große Arkana ({majorArcana.length})
+                        </button>
+                        <button
+                            onClick={() => setFilter('STÄBE')}
+                            className={`px-6 py-2 rounded-full text-sm font-medium tracking-wider transition-all ${filter === 'STÄBE'
+                                    ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
+                                    : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
+                                }`}
+                        >
+                            🔥 Stäbe ({wands.length})
+                        </button>
+                        <button
+                            onClick={() => setFilter('KELCHE')}
+                            className={`px-6 py-2 rounded-full text-sm font-medium tracking-wider transition-all ${filter === 'KELCHE'
+                                    ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
+                                    : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
+                                }`}
+                        >
+                            💧 Kelche ({cups.length})
+                        </button>
+                        <button
+                            onClick={() => setFilter('SCHWERTER')}
+                            className={`px-6 py-2 rounded-full text-sm font-medium tracking-wider transition-all ${filter === 'SCHWERTER'
+                                    ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
+                                    : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
+                                }`}
+                        >
+                            🌬️ Schwerter ({swords.length})
+                        </button>
+                        <button
+                            onClick={() => setFilter('MÜNZEN')}
+                            className={`px-6 py-2 rounded-full text-sm font-medium tracking-wider transition-all ${filter === 'MÜNZEN'
+                                    ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
+                                    : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
+                                }`}
+                        >
+                            ⛰️ Münzen ({pentacles.length})
+                        </button>
+                    </div>
                 </div>
             </section>
 
             {/* Cards Grid */}
             <section className="section-padding">
                 <div className="content-wrapper">
-                    {cards.length === 0 ? (
+                    {loading ? (
+                        <div className="text-center py-20">
+                            <div className="inline-block">
+                                <p className="text-[var(--color-gold)] text-xl mb-2">Lade Tarot-Karten...</p>
+                                <div className="w-8 h-8 border-4 border-[var(--color-gold)] border-t-transparent rounded-full animate-spin mx-auto"></div>
+                            </div>
+                        </div>
+                    ) : cards.length === 0 ? (
                         <div className="text-center py-20">
                             <div className="card-lunarloom inline-block">
                                 <p className="text-[var(--color-lavender)] text-xl mb-2">Keine Tarot-Karten gefunden</p>
@@ -37,34 +140,140 @@ export default async function TarotPage() {
                         </div>
                     ) : (
                         <>
-                            {/* Major Arcana Section */}
-                            <div className="mb-16">
-                                <h2 className="text-3xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] text-center mb-8">
-                                    <span className="gold-accent">✦</span> Große Arkana <span className="gold-accent">✦</span>
-                                </h2>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                    {cards
-                                        .filter((card) => card.arcana === 'Major Arcana')
-                                        .map((card) => (
-                                            <TarotCard key={card.id} card={card} />
-                                        ))}
-                                </div>
-                            </div>
-
-                            {/* Minor Arcana Section */}
-                            {cards.some((card) => card.arcana !== 'Major Arcana') && (
-                                <div>
+                            {/* Major Arcana */}
+                            {filter === 'all' && majorArcana.length > 0 && (
+                                <div className="mb-16">
                                     <h2 className="text-3xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] text-center mb-8">
-                                        <span className="gold-accent">✦</span> Kleine Arkana <span className="gold-accent">✦</span>
+                                        <span className="gold-accent">✦</span> Große Arkana <span className="gold-accent">✦</span>
                                     </h2>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                        {cards
-                                            .filter((card) => card.arcana !== 'Major Arcana')
-                                            .map((card) => (
-                                                <TarotCard key={card.id} card={card} />
-                                            ))}
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                                        {majorArcana.map((card) => (
+                                            <TarotCardGallery key={card.id} card={card} />
+                                        ))}
                                     </div>
                                 </div>
+                            )}
+
+                            {/* Filtered or Suits */}
+                            {filter === 'major' && (
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                                    {filteredCards.map((card) => (
+                                        <TarotCardGallery key={card.id} card={card} />
+                                    ))}
+                                </div>
+                            )}
+
+                            {filter === 'STÄBE' && (
+                                <div>
+                                    <h2 className="text-3xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] text-center mb-8">
+                                        <span className="gold-accent">🔥</span> Stäbe (Feuer) <span className="gold-accent">🔥</span>
+                                    </h2>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                                        {wands.map((card) => (
+                                            <TarotCardGallery key={card.id} card={card} />
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {filter === 'KELCHE' && (
+                                <div>
+                                    <h2 className="text-3xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] text-center mb-8">
+                                        <span className="gold-accent">💧</span> Kelche (Wasser) <span className="gold-accent">💧</span>
+                                    </h2>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                                        {cups.map((card) => (
+                                            <TarotCardGallery key={card.id} card={card} />
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {filter === 'SCHWERTER' && (
+                                <div>
+                                    <h2 className="text-3xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] text-center mb-8">
+                                        <span className="gold-accent">🌬️</span> Schwerter (Luft) <span className="gold-accent">🌬️</span>
+                                    </h2>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                                        {swords.map((card) => (
+                                            <TarotCardGallery key={card.id} card={card} />
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {filter === 'MÜNZEN' && (
+                                <div>
+                                    <h2 className="text-3xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] text-center mb-8">
+                                        <span className="gold-accent">⛰️</span> Münzen (Erde) <span className="gold-accent">⛰️</span>
+                                    </h2>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                                        {pentacles.map((card) => (
+                                            <TarotCardGallery key={card.id} card={card} />
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Small Suits when viewing all */}
+                            {filter === 'all' && (
+                                <>
+                                    {/* Wands */}
+                                    {wands.length > 0 && (
+                                        <div className="mb-16">
+                                            <h2 className="text-3xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] text-center mb-8">
+                                                <span className="gold-accent">🔥</span> Stäbe <span className="gold-accent">🔥</span>
+                                            </h2>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                                                {wands.map((card) => (
+                                                    <TarotCardGallery key={card.id} card={card} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Cups */}
+                                    {cups.length > 0 && (
+                                        <div className="mb-16">
+                                            <h2 className="text-3xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] text-center mb-8">
+                                                <span className="gold-accent">💧</span> Kelche <span className="gold-accent">💧</span>
+                                            </h2>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                                                {cups.map((card) => (
+                                                    <TarotCardGallery key={card.id} card={card} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Swords */}
+                                    {swords.length > 0 && (
+                                        <div className="mb-16">
+                                            <h2 className="text-3xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] text-center mb-8">
+                                                <span className="gold-accent">🌬️</span> Schwerter <span className="gold-accent">🌬️</span>
+                                            </h2>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                                                {swords.map((card) => (
+                                                    <TarotCardGallery key={card.id} card={card} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Pentacles */}
+                                    {pentacles.length > 0 && (
+                                        <div className="mb-16">
+                                            <h2 className="text-3xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] text-center mb-8">
+                                                <span className="gold-accent">⛰️</span> Münzen <span className="gold-accent">⛰️</span>
+                                            </h2>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                                                {pentacles.map((card) => (
+                                                    <TarotCardGallery key={card.id} card={card} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </>
                             )}
                         </>
                     )}
@@ -88,61 +297,3 @@ export default async function TarotPage() {
         </div>
     );
 }
-
-interface TarotCardProps {
-    card: {
-        id: number;
-        slug: string;
-        title: { rendered: string };
-        content: { rendered: string };
-        excerpt: { rendered: string };
-        arcana?: string;
-        keywords?: string;
-    };
-}
-
-function TarotCard({ card }: TarotCardProps) {
-    return (
-        <div className="card-lunarloom group cursor-pointer bg-[#5f4678] border-[#FDFBF7]/10 hover:border-[var(--color-gold)]/40 gold-glow-hover">
-            {/* Arcana Badge */}
-            <div className="flex justify-between items-start mb-3">
-                <span className="text-xs font-medium uppercase tracking-wider text-[var(--color-gold)]">
-                    {card.arcana === 'Major Arcana' ? 'Große Arkana' : card.arcana}
-                </span>
-            </div>
-
-            {/* Card Title */}
-            <h3
-                className="text-xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] mb-3 group-hover:text-[var(--color-gold)] transition-colors"
-                dangerouslySetInnerHTML={{ __html: card.title.rendered }}
-            />
-
-            {/* Content/Excerpt */}
-            <div
-                className="text-[#FDFBF7]/70 text-sm mb-4 line-clamp-3"
-                dangerouslySetInnerHTML={{
-                    __html: card.excerpt?.rendered || card.content?.rendered || ''
-                }}
-            />
-
-            {/* Keywords */}
-            {card.keywords && (
-                <div className="flex flex-wrap gap-2">
-                    {card.keywords.split(',').slice(0, 3).map((keyword, i) => (
-                        <span
-                            key={i}
-                            className="text-xs px-2 py-1 bg-[#FDFBF7]/10 text-[#FDFBF7] rounded-full"
-                        >
-                            {keyword.trim()}
-                        </span>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
-}
-
-export const metadata: Metadata = {
-    title: 'Tarot',
-    description: 'Entdecke die Bedeutung der 78 Tarot-Karten – Große und Kleine Arkana mit persönlichen Interpretationen.',
-};

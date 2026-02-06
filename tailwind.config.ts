@@ -28,6 +28,23 @@ const config: Config = {
             }
         },
     },
-    plugins: [],
+    plugins: [
+        function ({ addUtilities }: any) {
+            addUtilities({
+                '.backface-hidden': {
+                    'backface-visibility': 'hidden',
+                },
+                '.rotate-y-180': {
+                    transform: 'rotateY(180deg)',
+                },
+                '.transform-style-3d': {
+                    'transform-style': 'preserve-3d',
+                },
+                '.perspective-1000': {
+                    perspective: '1000px',
+                },
+            });
+        },
+    ],
 };
 export default config;

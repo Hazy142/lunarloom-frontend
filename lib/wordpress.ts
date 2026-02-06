@@ -11,8 +11,21 @@ export interface TarotCard {
   title: { rendered: string };
   content: { rendered: string };
   excerpt: { rendered: string };
-  arcana?: string;
-  keywords?: string;
+  meta: {
+    arcana?: string;
+    keywords?: string;
+    card_number?: string;
+    name_english?: string;
+    element?: string;
+    planet_zodiac?: string;
+    numerology?: string;
+    category?: string;
+    upright?: string;
+    reversed?: string;
+    love?: string;
+    career?: string;
+    spirituality?: string;
+  };
   featured_media?: number;
   _embedded?: {
     'wp:featuredmedia'?: Array<{
@@ -62,7 +75,7 @@ export interface Page {
 
 export async function getTarotCards(): Promise<TarotCard[]> {
   try {
-    const res = await fetch(`${WP_API_URL}/tarot_card?_embed`, {
+    const res = await fetch(`${WP_API_URL}/tarot_card?_embed&per_page=100`, {
       next: { revalidate: 60 }
     });
 
