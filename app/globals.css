@@ -1,26 +1,589 @@
 @import "tailwindcss";
 
+/* ============================================
+   LUNARLOOM DESIGN SYSTEM
+   Based on Logo Color Palette
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Colors */
+  --color-lavender: #6B5B7A;
+  --color-lavender-light: #8A7A99;
+  --color-lavender-dark: #3D2E4A;
+  --color-lavender-muted: #9B8BA8;
+
+  /* Accent Colors */
+  --color-gold: #C9A962;
+  --color-gold-light: #E0C88A;
+  --color-gold-dark: #A68B4B;
+
+  /* Background Colors */
+  --color-cream: #FDFBF7;
+  --color-cream-dark: #F5F0E8;
+  --color-parchment: #F8F4ED;
+
+  /* Text Colors */
+  --color-text-primary: #3D2E4A;
+  --color-text-secondary: #6B5B7A;
+  --color-text-muted: #9B8BA8;
+  --color-text-light: #FDFBF7;
+
+  /* Semantic Colors */
+  --background: var(--color-cream);
+  --foreground: var(--color-text-primary);
+  --card-bg: rgba(107, 91, 122, 0.05);
+  --card-border: rgba(107, 91, 122, 0.15);
+  --card-hover-border: rgba(201, 169, 98, 0.5);
+}
+
+/* Dark mode - mystical night theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1A1520;
+    --foreground: var(--color-cream);
+    --card-bg: rgba(107, 91, 122, 0.15);
+    --card-border: rgba(107, 91, 122, 0.3);
+    --card-hover-border: rgba(201, 169, 98, 0.6);
+  }
+}
+
+/* Gold Glow Shadow - for navigation cards */
+.gold-glow-hover {
+  transition: all 0.3s ease;
+  box-shadow: none;
+}
+
+.gold-glow-hover:hover {
+  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.35);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-cormorant);
+  --font-body: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-lavender-dark);
+}
+
+h1 {
+  font-size: 3.5rem;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2.5rem;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ============================================
+   PROSE STYLES FOR WORDPRESS CONTENT
+   ============================================ */
+
+.prose-lunarloom {
+  color: var(--color-text-primary);
+  line-height: 1.8;
+  font-size: 1.125rem;
+}
+
+.prose-lunarloom h1,
+.prose-lunarloom h2,
+.prose-lunarloom h3,
+.prose-lunarloom h4,
+.prose-lunarloom h5,
+.prose-lunarloom h6 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  color: var(--color-lavender-dark);
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+}
+
+.prose-lunarloom h1 {
+  font-size: 2.5rem;
+}
+
+.prose-lunarloom h2 {
+  font-size: 2rem;
+  border-bottom: 1px solid var(--color-gold);
+  padding-bottom: 0.5rem;
+}
+
+.prose-lunarloom h3 {
+  font-size: 1.5rem;
+  color: var(--color-lavender);
+}
+
+.prose-lunarloom h4 {
+  font-size: 1.25rem;
+}
+
+.prose-lunarloom p {
+  margin-bottom: 1.5em;
+}
+
+.prose-lunarloom a {
+  color: var(--color-gold-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--color-gold);
+  text-underline-offset: 3px;
+  transition: all 0.2s ease;
+}
+
+.prose-lunarloom a:hover {
+  color: var(--color-lavender);
+  text-decoration-color: var(--color-lavender);
+}
+
+.prose-lunarloom strong {
+  color: var(--color-lavender-dark);
+  font-weight: 600;
+}
+
+.prose-lunarloom em {
+  font-style: italic;
+  color: var(--color-lavender);
+}
+
+.prose-lunarloom ul,
+.prose-lunarloom ol {
+  margin: 1.5em 0;
+  padding-left: 1.5em;
+}
+
+.prose-lunarloom ul {
+  list-style-type: none;
+}
+
+.prose-lunarloom ul li {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose-lunarloom ul li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: var(--color-gold);
+  font-size: 0.8em;
+}
+
+.prose-lunarloom ol {
+  list-style-type: decimal;
+}
+
+.prose-lunarloom ol li {
+  margin-bottom: 0.5em;
+  padding-left: 0.5em;
+}
+
+.prose-lunarloom ol li::marker {
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.prose-lunarloom blockquote {
+  border-left: 4px solid var(--color-gold);
+  padding: 1rem 1.5rem;
+  margin: 2em 0;
+  background: linear-gradient(135deg, rgba(201, 169, 98, 0.08), rgba(107, 91, 122, 0.05));
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--color-lavender);
+}
+
+.prose-lunarloom blockquote p {
+  margin-bottom: 0;
+}
+
+.prose-lunarloom pre,
+.prose-lunarloom code {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9em;
+}
+
+.prose-lunarloom code {
+  background: var(--color-cream-dark);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  color: var(--color-lavender-dark);
+}
+
+.prose-lunarloom pre {
+  background: var(--color-lavender-dark);
+  color: var(--color-cream);
+  padding: 1.5em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+
+.prose-lunarloom pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.prose-lunarloom img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 2em 0;
+  box-shadow: 0 8px 30px rgba(61, 46, 74, 0.12);
+}
+
+.prose-lunarloom figure {
+  margin: 2em 0;
+}
+
+.prose-lunarloom figcaption {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-top: 0.75em;
+  font-style: italic;
+}
+
+.prose-lunarloom hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  margin: 3em 0;
+}
+
+.prose-lunarloom table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2em 0;
+}
+
+.prose-lunarloom th,
+.prose-lunarloom td {
+  padding: 0.75em 1em;
+  text-align: left;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.prose-lunarloom th {
+  background: var(--color-cream-dark);
+  color: var(--color-lavender-dark);
+  font-weight: 600;
+}
+
+/* ============================================
+   CARD COMPONENT
+   ============================================ */
+
+.card-lunarloom {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-lunarloom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-lavender), var(--color-gold));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-lunarloom:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: 0 8px 30px rgba(107, 91, 122, 0.1);
+  transform: translateY(-2px);
+}
+
+.card-lunarloom:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, var(--color-lavender), var(--color-lavender-dark));
+  color: var(--color-cream);
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 20px rgba(107, 91, 122, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background: transparent;
+  color: var(--color-lavender);
+  font-weight: 500;
+  border-radius: 8px;
+  border: 2px solid var(--color-lavender);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background: var(--color-lavender);
+  color: var(--color-cream);
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+  color: var(--color-lavender-dark);
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-gold:hover {
+  box-shadow: 0 4px 20px rgba(201, 169, 98, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   DECORATIVE ELEMENTS
+   ============================================ */
+
+.gold-accent {
+  color: var(--color-gold);
+}
+
+.lavender-accent {
+  color: var(--color-lavender);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-lavender), var(--color-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.divider-gold {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+  margin: 1rem auto;
+}
+
+.star-decoration::before {
+  content: "✦";
+  color: var(--color-gold);
+  margin-right: 0.5em;
+}
+
+.star-decoration::after {
+  content: "✦";
+  color: var(--color-gold);
+  margin-left: 0.5em;
+}
+
+/* ============================================
+   LAYOUT UTILITIES
+   ============================================ */
+
+.page-container {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-padding {
+  padding: 5rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 3rem 0;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-cream);
+  }
+
+  .prose-lunarloom {
+    color: var(--color-cream-dark);
+  }
+
+  .prose-lunarloom h1,
+  .prose-lunarloom h2,
+  .prose-lunarloom h3,
+  .prose-lunarloom h4 {
+    color: var(--color-cream);
+  }
+
+  .prose-lunarloom h2 {
+    border-bottom-color: var(--color-gold-dark);
+  }
+
+  .prose-lunarloom h3 {
+    color: var(--color-lavender-light);
+  }
+
+  .prose-lunarloom a {
+    color: var(--color-gold-light);
+  }
+
+  .prose-lunarloom strong {
+    color: var(--color-cream);
+  }
+
+  .prose-lunarloom em {
+    color: var(--color-lavender-light);
+  }
+
+  .prose-lunarloom blockquote {
+    background: rgba(107, 91, 122, 0.2);
+    color: var(--color-lavender-light);
+  }
+
+  .prose-lunarloom code {
+    background: rgba(107, 91, 122, 0.3);
+    color: var(--color-cream);
+  }
+
+  .prose-lunarloom th {
+    background: rgba(107, 91, 122, 0.2);
+    color: var(--color-cream);
+  }
 }

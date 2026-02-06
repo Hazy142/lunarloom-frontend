@@ -1,76 +1,148 @@
 import { getTarotCards } from '@/lib/wordpress';
+import Link from 'next/link';
+import { Metadata } from 'next';
 
 export default async function TarotPage() {
     const cards = await getTarotCards();
 
     return (
-        <main className="min-h-screen bg-gradient-to-b from-indigo-950 via-purple-900 to-black">
-            <div className="container mx-auto px-4 py-16">
-                {/* Header */}
-                <div className="text-center mb-16">
-                    <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
-                        Tarot Cards
+        <div className="page-container">
+            {/* Header */}
+            <section className="bg-gradient-to-b from-[var(--color-cream)] to-[var(--color-cream-dark)] section-padding">
+                <div className="content-wrapper text-center">
+                    <span className="text-[var(--color-gold)] text-sm uppercase tracking-widest font-medium">
+                        ✦ 78 Wege zur Weisheit ✦
+                    </span>
+                    <h1 className="text-5xl md:text-6xl font-[family-name:var(--font-cormorant)] font-semibold text-[var(--color-lavender-dark)] mt-4 mb-4">
+                        Tarot
                     </h1>
-                    <p className="text-purple-200 text-lg">
-                        Explore the mystical wisdom of the Tarot
+                    <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+                        Entdecke die Bedeutung jeder Karte – aus meiner persönlichen, evidenzbasierten Perspektive.
                     </p>
+                    <div className="divider-gold mt-6" />
                 </div>
+            </section>
 
-                {/* Cards Grid */}
-                {cards.length === 0 ? (
-                    <div className="text-center py-20">
-                        <div className="inline-block p-8 bg-purple-900/30 rounded-lg border border-purple-500/30">
-                            <p className="text-purple-300 text-xl mb-2">No tarot cards found</p>
-                            <p className="text-purple-400 text-sm">
-                                Add some cards in WordPress to see them here
-                            </p>
-                        </div>
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {cards.map((card) => (
-                            <div
-                                key={card.id}
-                                className="group relative bg-gradient-to-br from-purple-900/40 to-indigo-900/40 rounded-xl p-6 border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
-                            >
-                                {/* Card Header */}
-                                <div className="mb-4">
-                                    <h2
-                                        className="text-2xl font-bold text-purple-100 mb-2"
-                                        dangerouslySetInnerHTML={{ __html: card.title.rendered }}
-                                    />
-                                    {card.arcana && (
-                                        <span className="inline-block px-3 py-1 text-xs font-semibold text-purple-300 bg-purple-800/50 rounded-full">
-                                            {card.arcana}
-                                        </span>
-                                    )}
-                                </div>
-
-                                {/* Card Content */}
-                                <div
-                                    className="text-purple-200 prose prose-invert prose-sm max-w-none mb-4"
-                                    dangerouslySetInnerHTML={{ __html: card.excerpt?.rendered || card.content.rendered }}
-                                />
-
-                                {/* Keywords */}
-                                {card.keywords && (
-                                    <div className="mt-4 pt-4 border-t border-purple-500/20">
-                                        <p className="text-xs text-purple-400 uppercase tracking-wider mb-2">
-                                            Keywords
-                                        </p>
-                                        <p className="text-purple-300 text-sm">
-                                            {card.keywords}
-                                        </p>
-                                    </div>
-                                )}
-
-                                {/* Hover Effect Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-pink-600/0 group-hover:from-purple-600/10 group-hover:to-pink-600/10 rounded-xl transition-all duration-300 pointer-events-none" />
+            {/* Cards Grid */}
+            <section className="section-padding">
+                <div className="content-wrapper">
+                    {cards.length === 0 ? (
+                        <div className="text-center py-20">
+                            <div className="card-lunarloom inline-block">
+                                <p className="text-[var(--color-lavender)] text-xl mb-2">Keine Tarot-Karten gefunden</p>
+                                <p className="text-[var(--color-text-muted)] text-sm">
+                                    Karten werden bald hinzugefügt
+                                </p>
                             </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-        </main>
+                        </div>
+                    ) : (
+                        <>
+                            {/* Major Arcana Section */}
+                            <div className="mb-16">
+                                <h2 className="text-3xl font-[family-name:var(--font-cormorant)] font-semibold text-[var(--color-lavender-dark)] text-center mb-8">
+                                    <span className="gold-accent">✦</span> Große Arkana <span className="gold-accent">✦</span>
+                                </h2>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                    {cards
+                                        .filter((card) => card.arcana === 'Major Arcana')
+                                        .map((card) => (
+                                            <TarotCard key={card.id} card={card} />
+                                        ))}
+                                </div>
+                            </div>
+
+                            {/* Minor Arcana Section */}
+                            {cards.some((card) => card.arcana !== 'Major Arcana') && (
+                                <div>
+                                    <h2 className="text-3xl font-[family-name:var(--font-cormorant)] font-semibold text-[var(--color-lavender-dark)] text-center mb-8">
+                                        <span className="gold-accent">✦</span> Kleine Arkana <span className="gold-accent">✦</span>
+                                    </h2>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                        {cards
+                                            .filter((card) => card.arcana !== 'Major Arcana')
+                                            .map((card) => (
+                                                <TarotCard key={card.id} card={card} />
+                                            ))}
+                                    </div>
+                                </div>
+                            )}
+                        </>
+                    )}
+                </div>
+            </section>
+
+            {/* CTA */}
+            <section className="bg-[var(--color-cream-dark)] section-padding">
+                <div className="content-wrapper text-center">
+                    <h2 className="text-2xl font-[family-name:var(--font-cormorant)] font-semibold text-[var(--color-lavender-dark)] mb-4">
+                        Möchtest du ein persönliches Reading?
+                    </h2>
+                    <p className="text-[var(--color-text-secondary)] mb-6 max-w-xl mx-auto">
+                        Lass die Karten für dich sprechen – individuell und tiefgehend.
+                    </p>
+                    <Link href="/buchung" className="btn-primary">
+                        <span className="mr-2">🔮</span> Termin buchen
+                    </Link>
+                </div>
+            </section>
+        </div>
     );
 }
+
+interface TarotCardProps {
+    card: {
+        id: number;
+        slug: string;
+        title: { rendered: string };
+        content: { rendered: string };
+        excerpt: { rendered: string };
+        arcana?: string;
+        keywords?: string;
+    };
+}
+
+function TarotCard({ card }: TarotCardProps) {
+    return (
+        <div className="card-lunarloom group cursor-pointer">
+            {/* Arcana Badge */}
+            <div className="flex justify-between items-start mb-3">
+                <span className="text-xs font-medium uppercase tracking-wider text-[var(--color-gold)]">
+                    {card.arcana === 'Major Arcana' ? 'Große Arkana' : card.arcana}
+                </span>
+            </div>
+
+            {/* Card Title */}
+            <h3
+                className="text-xl font-[family-name:var(--font-cormorant)] font-semibold text-[var(--color-lavender-dark)] mb-3 group-hover:text-[var(--color-lavender)] transition-colors"
+                dangerouslySetInnerHTML={{ __html: card.title.rendered }}
+            />
+
+            {/* Content/Excerpt */}
+            <div
+                className="text-[var(--color-text-secondary)] text-sm mb-4 line-clamp-3"
+                dangerouslySetInnerHTML={{
+                    __html: card.excerpt?.rendered || card.content?.rendered || ''
+                }}
+            />
+
+            {/* Keywords */}
+            {card.keywords && (
+                <div className="flex flex-wrap gap-2">
+                    {card.keywords.split(',').slice(0, 3).map((keyword, i) => (
+                        <span
+                            key={i}
+                            className="text-xs px-2 py-1 bg-[var(--color-lavender)]/10 text-[var(--color-lavender)] rounded-full"
+                        >
+                            {keyword.trim()}
+                        </span>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
+export const metadata: Metadata = {
+    title: 'Tarot',
+    description: 'Entdecke die Bedeutung der 78 Tarot-Karten – Große und Kleine Arkana mit persönlichen Interpretationen.',
+};
