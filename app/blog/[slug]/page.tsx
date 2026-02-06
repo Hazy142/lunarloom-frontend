@@ -96,7 +96,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                         {/* Back Link */}
                         <Link
                             href="/blog"
-                            className="inline-flex items-center gap-2 text-[var(--color-lavender)] hover:text-[var(--color-lavender-dark)] transition-colors mb-8"
+                            className="inline-flex items-center gap-2 text-[#FDFBF7]/70 hover:text-[var(--color-gold)] transition-colors mb-8"
                         >
                             <span>←</span> Zurück zum Blog
                         </Link>
@@ -125,7 +125,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                                 )}
                             </div>
                             <h1
-                                className="text-4xl md:text-5xl font-[family-name:var(--font-cormorant)] font-semibold text-[var(--color-lavender-dark)] leading-tight"
+                                className="text-4xl md:text-5xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] leading-tight"
                                 dangerouslySetInnerHTML={{ __html: post.title.rendered }}
                             />
                             <div className="divider-gold mt-8" style={{ marginLeft: 0 }} />
@@ -133,7 +133,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
                         {/* Article Content */}
                         <div
-                            className="prose-lunarloom"
+                            className="prose-lunarloom text-[#FDFBF7]/80"
                             dangerouslySetInnerHTML={{ __html: post.content.rendered }}
                         />
 

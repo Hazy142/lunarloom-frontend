@@ -8,15 +8,15 @@ export default async function RitualsPage() {
     return (
         <div className="page-container">
             {/* Header */}
-            <section className="bg-gradient-to-b from-[var(--color-cream)] to-[var(--color-cream-dark)] section-padding">
+            <section className="bg-gradient-to-b from-[#a3a0a5] via-[#5f4678] to-[#3f2f4e] section-padding">
                 <div className="content-wrapper text-center">
                     <span className="text-[var(--color-gold)] text-sm uppercase tracking-widest font-medium">
                         ✦ Im Einklang mit dem Mond ✦
                     </span>
-                    <h1 className="text-5xl md:text-6xl font-[family-name:var(--font-cormorant)] font-semibold text-[var(--color-lavender-dark)] mt-4 mb-4">
+                    <h1 className="text-5xl md:text-6xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] mt-4 mb-4">
                         Rituale
                     </h1>
-                    <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+                    <p className="text-lg text-[#FDFBF7]/80 max-w-2xl mx-auto">
                         Heilige Praktiken für spirituelle Transformation, abgestimmt auf die Mondphasen.
                     </p>
                     <div className="divider-gold mt-6" />
@@ -39,10 +39,10 @@ export default async function RitualsPage() {
                     ) : (
                         <div className="max-w-4xl mx-auto space-y-8">
                             {rituals.map((ritual) => (
-                                <article key={ritual.id} className="card-lunarloom group">
+                                <article key={ritual.id} className="card-lunarloom group bg-[#5f4678] border border-[#FDFBF7]/10 hover:border-[var(--color-gold)]/40 gold-glow-hover">
                                     <div className="flex flex-col md:flex-row md:items-start gap-6">
                                         {/* Moon Phase Icon */}
-                                        <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-[var(--color-lavender)]/20 to-[var(--color-gold)]/20 flex items-center justify-center text-3xl">
+                                        <div className="flex-shrink-0 w-16 h-16 rounded-full bg-[#3D2E4A] flex items-center justify-center text-3xl">
                                             🌙
                                         </div>
 
@@ -50,7 +50,7 @@ export default async function RitualsPage() {
                                             {/* Header */}
                                             <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
                                                 <h2
-                                                    className="text-2xl font-[family-name:var(--font-cormorant)] font-semibold text-[var(--color-lavender-dark)]"
+                                                    className="text-2xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7]"
                                                     dangerouslySetInnerHTML={{ __html: ritual.title.rendered }}
                                                 />
                                                 {ritual.moon_phase && (
@@ -62,14 +62,14 @@ export default async function RitualsPage() {
 
                                             {/* Duration */}
                                             {ritual.duration && (
-                                                <p className="text-[var(--color-text-muted)] text-sm mb-4 flex items-center gap-2">
+                                                <p className="text-[#FDFBF7]/60 text-sm mb-4 flex items-center gap-2">
                                                     <span>⏱️</span> Dauer: {ritual.duration}
                                                 </p>
                                             )}
 
                                             {/* Content */}
                                             <div
-                                                className="prose-lunarloom text-[var(--color-text-secondary)]"
+                                                className="prose-lunarloom text-[#FDFBF7]/70"
                                                 dangerouslySetInnerHTML={{ __html: ritual.content.rendered }}
                                             />
                                         </div>
@@ -82,31 +82,31 @@ export default async function RitualsPage() {
             </section>
 
             {/* Moon Phase Legend */}
-            <section className="bg-[var(--color-cream-dark)] section-padding">
+            <section className="bg-[#3D2E4A] section-padding">
                 <div className="content-wrapper">
-                    <h2 className="text-2xl font-[family-name:var(--font-cormorant)] font-semibold text-[var(--color-lavender-dark)] text-center mb-8">
+                    <h2 className="text-2xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] text-center mb-8">
                         Die Mondphasen
                     </h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-                        <div className="text-center">
-                            <div className="text-4xl mb-2">🌑</div>
-                            <h3 className="font-semibold text-[var(--color-lavender-dark)]">Neumond</h3>
-                            <p className="text-sm text-[var(--color-text-muted)]">Neubeginn & Intention</p>
+                        <div className="text-center group">
+                            <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">🌑</div>
+                            <h3 className="font-semibold text-[#FDFBF7]">Neumond</h3>
+                            <p className="text-sm text-[#FDFBF7]/60">Neubeginn & Intention</p>
                         </div>
-                        <div className="text-center">
-                            <div className="text-4xl mb-2">🌓</div>
-                            <h3 className="font-semibold text-[var(--color-lavender-dark)]">Zunehmend</h3>
-                            <p className="text-sm text-[var(--color-text-muted)]">Wachstum & Aktion</p>
+                        <div className="text-center group">
+                            <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">🌓</div>
+                            <h3 className="font-semibold text-[#FDFBF7]">Zunehmend</h3>
+                            <p className="text-sm text-[#FDFBF7]/60">Wachstum & Aktion</p>
                         </div>
-                        <div className="text-center">
-                            <div className="text-4xl mb-2">🌕</div>
-                            <h3 className="font-semibold text-[var(--color-lavender-dark)]">Vollmond</h3>
-                            <p className="text-sm text-[var(--color-text-muted)]">Manifestation & Höhepunkt</p>
+                        <div className="text-center group">
+                            <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">🌕</div>
+                            <h3 className="font-semibold text-[#FDFBF7]">Vollmond</h3>
+                            <p className="text-sm text-[#FDFBF7]/60">Manifestation & Höhepunkt</p>
                         </div>
-                        <div className="text-center">
-                            <div className="text-4xl mb-2">🌗</div>
-                            <h3 className="font-semibold text-[var(--color-lavender-dark)]">Abnehmend</h3>
-                            <p className="text-sm text-[var(--color-text-muted)]">Loslassen & Reflexion</p>
+                        <div className="text-center group">
+                            <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">🌗</div>
+                            <h3 className="font-semibold text-[#FDFBF7]">Abnehmend</h3>
+                            <p className="text-sm text-[#FDFBF7]/60">Loslassen & Reflexion</p>
                         </div>
                     </div>
                 </div>
@@ -115,10 +115,10 @@ export default async function RitualsPage() {
             {/* CTA */}
             <section className="section-padding">
                 <div className="content-wrapper text-center">
-                    <h2 className="text-2xl font-[family-name:var(--font-cormorant)] font-semibold text-[var(--color-lavender-dark)] mb-4">
+                    <h2 className="text-2xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] mb-4">
                         Möchtest du ein geführtes Ritual erleben?
                     </h2>
-                    <p className="text-[var(--color-text-secondary)] mb-6 max-w-xl mx-auto">
+                    <p className="text-[#FDFBF7]/70 mb-6 max-w-xl mx-auto">
                         Buche eine persönliche Session für ein individuell abgestimmtes Ritual.
                     </p>
                     <Link href="/buchung" className="btn-primary">

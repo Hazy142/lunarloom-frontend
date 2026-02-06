@@ -28,12 +28,18 @@
   --color-text-muted: #9B8BA8;
   --color-text-light: #FDFBF7;
 
-  /* Semantic Colors */
-  --background: var(--color-cream);
-  --foreground: var(--color-text-primary);
-  --card-bg: rgba(107, 91, 122, 0.05);
-  --card-border: rgba(107, 91, 122, 0.15);
-  --card-hover-border: rgba(201, 169, 98, 0.5);
+  /* Semantic Colors - Updated for Dark Mystical Theme */
+  --background: #3f2f4e;
+  --foreground: var(--color-cream);
+  --card-bg: #5f4678;
+  --card-border: rgba(253, 251, 247, 0.1);
+  --card-hover-border: rgba(201, 169, 98, 0.4);
+
+  /* Mystical Theme Palette */
+  --color-mystic-bg: #3f2f4e;
+  --color-mystic-dark: #3D2E4A;
+  --color-mystic-purple: #5f4678;
+  --color-mystic-gold: #C9A962;
 }
 
 /* Dark mode - mystical night theme */

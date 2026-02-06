@@ -38,15 +38,15 @@ export default async function BlogPage() {
     return (
         <div className="page-container">
             {/* Header */}
-            <section className="bg-gradient-to-b from-[var(--color-cream)] to-[var(--color-cream-dark)] section-padding">
+            <section className="bg-gradient-to-b from-[#a3a0a5] via-[#5f4678] to-[#3f2f4e] section-padding">
                 <div className="content-wrapper text-center">
                     <span className="text-[var(--color-gold)] text-sm uppercase tracking-widest font-medium">
                         ✦ Erkenntnisse & Essays ✦
                     </span>
-                    <h1 className="text-5xl md:text-6xl font-[family-name:var(--font-cormorant)] font-semibold text-[var(--color-lavender-dark)] mt-4 mb-4">
+                    <h1 className="text-5xl md:text-6xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] mt-4 mb-4">
                         Blog
                     </h1>
-                    <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+                    <p className="text-lg text-[#FDFBF7]/80 max-w-2xl mx-auto">
                         Tiefgehende Artikel zu Tarot, Astrologie und spirituellem Wachstum
                     </p>
                     <div className="divider-gold mt-6" />
@@ -72,7 +72,7 @@ export default async function BlogPage() {
 
                                 return (
                                     <Link key={post.id} href={`/blog/${post.slug}`}>
-                                        <article className="card-lunarloom group overflow-hidden">
+                                        <article className="card-lunarloom group overflow-hidden bg-[#5f4678] border border-[#FDFBF7]/10 hover:border-[var(--color-gold)]/40 gold-glow-hover">
                                             <div className="flex flex-col md:flex-row gap-6">
                                                 {/* Featured Image */}
                                                 {featuredImage && (
@@ -94,11 +94,11 @@ export default async function BlogPage() {
                                                         })}
                                                     </time>
                                                     <h2
-                                                        className="text-2xl font-[family-name:var(--font-cormorant)] font-semibold text-[var(--color-lavender-dark)] mt-2 mb-3 group-hover:text-[var(--color-lavender)] transition-colors"
+                                                        className="text-2xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] mt-2 mb-3 group-hover:text-[var(--color-gold)] transition-colors"
                                                         dangerouslySetInnerHTML={{ __html: post.title.rendered }}
                                                     />
                                                     <div
-                                                        className="text-[var(--color-text-secondary)] line-clamp-3"
+                                                        className="text-[#FDFBF7]/70 line-clamp-3"
                                                         dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
                                                     />
                                                     <div className="mt-4 text-[var(--color-gold)] font-medium group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">

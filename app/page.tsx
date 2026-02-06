@@ -45,25 +45,6 @@ export default async function Home() {
           <p className="text-xl md:text-2xl text-[#FDFBF7]/90 mb-3 font-[family-name:var(--font-cormorant)] font-medium">
             <span className="text-[var(--color-gold)]">✦</span> Tarot, Rituale & Mondzyklen <span className="text-[var(--color-gold)]">✦</span>
           </p>
-
-          {startPage?.content.rendered && (
-            <div
-              className="text-[#FDFBF7]/70 max-w-2xl mx-auto mt-6"
-              dangerouslySetInnerHTML={{ __html: startPage.content.rendered }}
-            />
-          )}
-
-          <div className="divider-gold mt-10" />
-
-          {/* CTA Buttons */}
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/tarot" className="btn-primary">
-              <span className="mr-2">🔮</span> Tarot entdecken
-            </Link>
-            <Link href="/buchung" className="btn-gold">
-              <span className="mr-2">✦</span> Reading buchen
-            </Link>
-          </div>
         </div>
 
         {/* Scroll Indicator */}
@@ -74,7 +55,35 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Navigation Cards */}
+      {/* About Teaser - NOW SECOND */}
+      <section className="section-padding bg-[#3f2f4e]">
+        <div className="content-wrapper">
+          <div className="max-w-3xl mx-auto text-center">
+            <span className="text-[var(--color-gold)] text-sm uppercase tracking-widest font-medium">
+              Evidenzbasierte Spiritualität
+            </span>
+            <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] mt-4 mb-6">
+              Willkommen bei LunarLoom
+            </h2>
+            <p className="text-lg text-[#FDFBF7]/70 leading-relaxed mb-4">
+              Hier findest du authentische Tarot-Interpretationen, kraftvolle Mondrituale
+              und tiefgehende Ressourcen für deine spirituelle Reise. Kein Hokuspokus –
+              nur ehrliche Weisheit mit Herz und Verstand.
+            </p>
+            {startPage?.content.rendered && (
+              <div
+                className="text-lg text-[#FDFBF7]/70 leading-relaxed mb-8 prose-lunarloom"
+                dangerouslySetInnerHTML={{ __html: startPage.content.rendered }}
+              />
+            )}
+            <Link href="/ueber" className="inline-flex items-center justify-center px-8 py-3.5 font-medium rounded-lg border-2 border-[#FDFBF7]/30 text-[#FDFBF7] hover:bg-[#FDFBF7]/10 transition-all">
+              Mehr über Rachel erfahren
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Navigation Cards - NOW THIRD */}
       <section className="section-padding bg-[#3f2f4e]">
         <div className="content-wrapper">
           <div className="text-center mb-12">
@@ -133,28 +142,6 @@ export default async function Home() {
                   Lesen <span>→</span>
                 </div>
               </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* About Teaser */}
-      <section className="section-padding bg-[#3f2f4e]">
-        <div className="content-wrapper">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="text-[var(--color-gold)] text-sm uppercase tracking-widest font-medium">
-              Evidenzbasierte Spiritualität
-            </span>
-            <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] mt-4 mb-6">
-              Willkommen bei LunarLoom
-            </h2>
-            <p className="text-lg text-[#FDFBF7]/70 leading-relaxed mb-8">
-              Hier findest du authentische Tarot-Interpretationen, kraftvolle Mondrituale
-              und tiefgehende Ressourcen für deine spirituelle Reise. Kein Hokuspokus –
-              nur ehrliche Weisheit mit Herz und Verstand.
-            </p>
-            <Link href="/ueber" className="inline-flex items-center justify-center px-8 py-3.5 font-medium rounded-lg border-2 border-[#FDFBF7]/30 text-[#FDFBF7] hover:bg-[#FDFBF7]/10 transition-all">
-              Mehr über Rachel erfahren
             </Link>
           </div>
         </div>
