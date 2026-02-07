@@ -17,9 +17,6 @@ export default async function UeberPage() {
                     <span className="text-[var(--color-gold)] text-sm uppercase tracking-widest font-medium">
                         ✦ Über Mich ✦
                     </span>
-                    <h1 className="text-5xl md:text-6xl font-[family-name:var(--font-cormorant)] font-semibold text-[#FDFBF7] mt-4 mb-4">
-                        Rachel’s Lunar Loom
-                    </h1>
                 </div>
             </section>
 
