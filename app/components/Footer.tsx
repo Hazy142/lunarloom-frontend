@@ -9,7 +9,7 @@ const footerLinks = {
         { href: '/ressourcen', label: 'Ressourcen' },
     ],
     about: [
-        { href: '/ueber', label: 'Über Rachel' },
+        { href: '/ueber', label: 'Über LunarLoom' },
         { href: '/buchung', label: 'Buchung' },
         { href: '/kontakt', label: 'Kontakt' },
         { href: '/faq', label: 'FAQ' },
