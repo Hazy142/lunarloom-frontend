@@ -64,8 +64,8 @@ export default function TarotPage() {
                         <button
                             onClick={() => setFilter('all')}
                             className={`px-6 py-2 rounded-full text-sm font-medium tracking-wider transition-all ${filter === 'all'
-                                    ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
-                                    : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
+                                ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
+                                : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
                                 }`}
                         >
                             ALLE ({cards.length})
@@ -73,8 +73,8 @@ export default function TarotPage() {
                         <button
                             onClick={() => setFilter('major')}
                             className={`px-6 py-2 rounded-full text-sm font-medium tracking-wider transition-all ${filter === 'major'
-                                    ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
-                                    : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
+                                ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
+                                : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
                                 }`}
                         >
                             Große Arkana ({majorArcana.length})
@@ -82,8 +82,8 @@ export default function TarotPage() {
                         <button
                             onClick={() => setFilter('STÄBE')}
                             className={`px-6 py-2 rounded-full text-sm font-medium tracking-wider transition-all ${filter === 'STÄBE'
-                                    ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
-                                    : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
+                                ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
+                                : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
                                 }`}
                         >
                             🔥 Stäbe ({wands.length})
@@ -91,8 +91,8 @@ export default function TarotPage() {
                         <button
                             onClick={() => setFilter('KELCHE')}
                             className={`px-6 py-2 rounded-full text-sm font-medium tracking-wider transition-all ${filter === 'KELCHE'
-                                    ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
-                                    : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
+                                ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
+                                : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
                                 }`}
                         >
                             💧 Kelche ({cups.length})
@@ -100,8 +100,8 @@ export default function TarotPage() {
                         <button
                             onClick={() => setFilter('SCHWERTER')}
                             className={`px-6 py-2 rounded-full text-sm font-medium tracking-wider transition-all ${filter === 'SCHWERTER'
-                                    ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
-                                    : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
+                                ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
+                                : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
                                 }`}
                         >
                             🌬️ Schwerter ({swords.length})
@@ -109,8 +109,8 @@ export default function TarotPage() {
                         <button
                             onClick={() => setFilter('MÜNZEN')}
                             className={`px-6 py-2 rounded-full text-sm font-medium tracking-wider transition-all ${filter === 'MÜNZEN'
-                                    ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
-                                    : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
+                                ? 'bg-[var(--color-gold)] text-[#1a0b2e]'
+                                : 'bg-[#5f4678] text-[#FDFBF7] hover:bg-[#6B5B7A]'
                                 }`}
                         >
                             ⛰️ Münzen ({pentacles.length})

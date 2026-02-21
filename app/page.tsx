@@ -77,7 +77,7 @@ export default async function Home() {
               />
             )}
             <Link href="/ueber" className="inline-flex items-center justify-center px-8 py-3.5 font-medium rounded-lg border-2 border-[#FDFBF7]/30 text-[#FDFBF7] hover:bg-[#FDFBF7]/10 transition-all">
-              Mehr über Rachel erfahren
+              Mehr über LunarLoom erfahren
             </Link>
           </div>
         </div>

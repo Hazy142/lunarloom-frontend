@@ -30,9 +30,9 @@ export const metadata: Metadata = {
     default: "LunarLoom – Tarot, Rituale & Mondzyklen",
     template: "%s | LunarLoom",
   },
-  description: "Tarot-Readings, Mondrituale und spirituelles Wachstum. Evidenzbasierte Spiritualität mit authentischer Interpretation von Rachel.",
+  description: "Tarot-Readings, Mondrituale und spirituelles Wachstum. Evidenzbasierte Spiritualität mit authentischer Interpretation.",
   keywords: ["Tarot", "Rituale", "Mond", "Spiritualität", "Astrologie", "LunarLoom"],
-  authors: [{ name: "Rachel" }],
+  authors: [{ name: "LunarLoom" }],
   openGraph: {
     type: "website",
     locale: "de_DE",
