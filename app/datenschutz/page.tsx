@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 export default async function DatenschutzPage() {
-    const page = await getPageBySlug('datenschutz');
+    const page = await getPageBySlug('datenschutz-2');
 
     if (!page) {
         notFound();
